@@ -71,6 +71,8 @@ class LangSwitcherPlugin extends Plugin
         $data->current = $this->grav['language']->getLanguage();
         $data->languages = $this->grav['language']->getLanguages();
 
+        // list of languages that the page is translated in
+        $data->translations = $this->grav['page']->translatedLanguages();
         $this->grav['twig']->twig_vars['langswitcher'] = $data;
 
         if ($this->config->get('plugins.langswitcher.built_in_css')) {
