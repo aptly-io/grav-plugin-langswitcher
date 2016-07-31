@@ -1,17 +1,30 @@
-<ul class="langswitcher">
-{% set langobj = grav['language'] %}
-
-{% for key in langswitcher.languages %}
-
-    {% if key == langswitcher.current %}
-        {% set lang_url = page.url %}
-        {% set active_class = ' active' %}
+<li>
+  <a href="{{ page.url }}">
+    <i class="fa fa-language"></i>
+    {{ langswitcher.current|upper }} 
+{% if 1 < langswitcher.translations|length  %}
+    <i class="fa fa-caret-down"></i>
+{%endif%}
+  </a>
+  <ul>
+    {# Are there translations available?#}
+    {% if 1 < langswitcher.translations|length  %}
+      {% for key in langswitcher.languages %}
+        {# dont list the active language (that in the menu title already)#}
+        {# dont list a language for which the page is not translated into#}
+        {% if key != langswitcher.current and langswitcher.translations[ key ] is defined %}
+          <li>
+            <a href="{{ url(key~langswitcher.page_route) }}">
+              {{key|upper }} ({{ native_name(key)|capitalize }})
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
     {% else %}
-        {% set lang_url = base_url_simple ~ langobj.getLanguageURLPrefix(key)~langswitcher.page_route ?: '/' %}
-        {% set active_class = '' %}
-    {% endif %}
-
-    <li><a href="{{ lang_url ~ uri.params }}" class="external{{ active_class }}">{{  native_name(key)|capitalize }}</a></li>
-
-{% endfor %}
-</ul>
+      <li><a>
+        No translations.<br>
+        Using {{native_name(langswitcher.current)|capitalize}} as fall-back
+      </a></li>
+    {% endif%}
+  </ul>
+</li>
