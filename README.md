@@ -4,6 +4,12 @@
 
 `LangSwitcher` is a [Grav](http://github.com/getgrav/grav) plugin that provides native language text links to switch between [Multiple Languages](http://learn.getgrav.org/content/multi-language) in Grav **0.9.30** or greater.
 
+## Note on my changes
+
+- Add translations for which the page has translated
+- Organize in a sub-menu structure
+- Fall back to default if current language has no translation
+
 # Installation
 
 Installing the LangSwitcher plugin can be done in one of two ways. Our GPM (Grav Package Manager) installation method enables you to quickly and easily install the plugin with a simple terminal command, while the manual method enables you to do so via a zip file.
